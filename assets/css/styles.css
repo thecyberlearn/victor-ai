@@ -1,0 +1,1316 @@
+/* Common Styles for AI Services Hub */
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout utilities */
+.container {
+  max-width: 7xl;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Component styles */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.service-card {
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e5e7eb;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Loading skeleton */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLine {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.8); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-fade {
+  animation: fadeLine 0.6s ease-in;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Status indicator */
+.status-indicator {
+  position: relative;
+}
+
+.status-indicator::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: pulse 2s infinite;
+}
+
+/* Mobile responsive utilities */
+@media (max-width: 768px) {
+  .mobile-stack {
+    flex-direction: column;
+  }
+  
+  .mobile-full {
+    width: 100%;
+  }
+
+  .mobile-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Form styles */
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Collapsible content */
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapsible-content.open {
+  max-height: 200px;
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text utilities */
+.text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  max-width: 24rem;
+  width: 100%;
+  animation: slideUp 0.3s ease-out;
+}
+
+@media (max-width: 640px) {
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+}
+
+/* Priority and status indicators */
+.priority-high { border-left: 4px solid #ef4444; }
+.priority-medium { border-left: 4px solid #f59e0b; }
+.priority-low { border-left: 4px solid #10b981; }
+
+.email-unread { 
+  background: rgba(59, 130, 246, 0.1); 
+  border-left: 3px solid #3b82f6; 
+}
+
+.email-read { 
+  background: rgba(255, 255, 255, 0.05); 
+}
+
+/* Task status */
+.task-completed { 
+  background: rgba(16, 185, 129, 0.1); 
+  border-left: 4px solid #10b981;
+  opacity: 0.7;
+}
+
+.task-overdue { 
+  background: rgba(239, 68, 68, 0.1); 
+  border-left: 4px solid #ef4444;
+}
+
+.task-due-today { 
+  background: rgba(249, 115, 22, 0.1); 
+  border-left: 4px solid #f97316;
+}
+
+.task-upcoming { 
+  background: rgba(59, 130, 246, 0.1); 
+  border-left: 4px solid #3b82f6;
+}
+
+/* Meeting status */
+.meeting-upcoming { 
+  border-left: 4px solid #3b82f6; 
+  background: rgba(59, 130, 246, 0.1); 
+}
+
+.meeting-current { 
+  border-left: 4px solid #ef4444; 
+  background: rgba(239, 68, 68, 0.1); 
+}
+
+.meeting-completed { 
+  border-left: 4px solid #10b981; 
+  background: rgba(16, 185, 129, 0.1); 
+}
+
+/* Calendar specific */
+.calendar-day {
+  aspect-ratio: 1;
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-day.today {
+  background: rgba(59, 130, 246, 0.3);
+  border: 2px solid #3b82f6;
+}
+
+.calendar-day.has-events {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+/* Progress bars */
+.progress-bar {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  height: 6px;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Kanban */
+.kanban-column {
+  min-height: 400px;
+}
+
+.task-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tooltips */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 100;
+}
+
+/* Responsive font sizes */
+html {
+  font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+/* Email Agent Specific Styles - Add these to your styles.css */
+
+/* Email card styles */
+.email-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.email-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Email read/unread status */
+.email-unread {
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 4px solid #3b82f6;
+  font-weight: 500;
+}
+
+.email-read {
+  background: white;
+  border-left: 4px solid transparent;
+}
+
+/* Priority indicators */
+.priority-high {
+  border-right: 4px solid #ef4444;
+}
+
+.priority-medium {
+  border-right: 4px solid #f59e0b;
+}
+
+.priority-low {
+  border-right: 4px solid #10b981;
+}
+
+/* Filter button styles */
+.filter-btn {
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background-color: #dbeafe !important;
+  color: #1d4ed8 !important;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Email type badges */
+.email-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.email-type-email {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.email-type-pdf {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
+.email-type-image {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+/* Email modal styles */
+#emailModal .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Email list animations */
+.email-list-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.email-list-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+/* Loading states specific to emails */
+.email-loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 0.5rem;
+  height: 80px;
+}
+
+/* Email action buttons */
+.email-action-btn {
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.email-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Email summary text */
+.email-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+/* Email subject text */
+.email-subject {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+/* Responsive email cards */
+@media (max-width: 768px) {
+  .email-card {
+    padding: 1rem;
+  }
+  
+  .email-card .email-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .email-action-btn {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+/* Email stats cards */
+.email-stat-card {
+  transition: all 0.2s ease;
+}
+
+.email-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Email search highlighting */
+.email-search-highlight {
+  background-color: #fef3c7;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+/* Email attachment indicators */
+.email-attachment-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* Email priority badges */
+.priority-badge-high {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
+.priority-badge-medium {
+  background-color: #fed7aa;
+  color: #ea580c;
+}
+
+.priority-badge-low {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+/* Email timestamp styling */
+.email-timestamp {
+  color: #6b7280;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* Email sender styling */
+.email-sender {
+  font-weight: 600;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Quick action panel animations */
+.quick-action-btn {
+  transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+  transform: translateX(4px);
+}
+
+/* Email modal backdrop */
+#emailModal {
+  backdrop-filter: blur(4px);
+}
+
+/* Recent activity items */
+.activity-item {
+  transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+  background-color: #f3f4f6;
+  transform: translateX(2px);
+}
+
+
+/* Add this to your styles.css */
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+/* Add these to your styles.css file */
+
+/* Toast animations */
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+/* Wrench icon hover animation */
+.group:hover .group-hover\:rotate-12 {
+  transform: rotate(12deg);
+}
+
+/* Modal backdrop blur */
+#crudModal {
+  backdrop-filter: blur(4px);
+}
+
+/* Smooth transitions */
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Add these if not already present */
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.group:hover .group-hover\:rotate-12 {
+  transform: rotate(12deg);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+/* Mobile Responsive Improvements */
+
+/* Mobile-first approach for main content */
+@media (max-width: 768px) {
+  
+  /* Header Section */
+  .text-center.mb-8 h1 {
+    font-size: 2rem !important; /* Smaller title on mobile */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  /* Enhanced Search Command Center */
+  .bg-white.rounded-2xl.p-6.mb-8 {
+    padding: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Trade AI Command Header */
+  .flex.items-center.gap-3.mb-4 h2 {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Search Input */
+  #query {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 0.875rem !important;
+  }
+  
+  /* Search Button */
+  .bg-blue-600.hover\:bg-blue-700 {
+    padding: 0.875rem 1.5rem !important;
+    min-width: auto !important;
+  }
+  
+  /* Quick Searches */
+  .flex.flex-wrap.gap-2 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .flex.flex-wrap.gap-2 button {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+    white-space: nowrap;
+  }
+  
+  /* Advanced Filters Section */
+  .border-t.border-gray-200.pt-4 {
+    padding-top: 1rem !important;
+  }
+  
+  /* Advanced Filters Grid */
+  .grid.grid-cols-1.md\:grid-cols-3.gap-4 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Form Labels */
+  .block.text-sm.font-medium.text-gray-700.mb-2 {
+    margin-bottom: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Form Inputs and Selects */
+  .w-full.px-3.py-2 {
+    padding: 0.75rem !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  /* Advanced Search Buttons */
+  .flex.flex-wrap.gap-3 {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .flex.flex-wrap.gap-3 button {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Main Content Grid - Stack on mobile */
+  .grid.grid-cols-1.lg\:grid-cols-3.gap-6 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Results Section */
+  .lg\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+  
+  /* Search Results Header */
+  .flex.items-center.justify-between.mb-6 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .flex.items-center.gap-2 {
+    width: 100% !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+  }
+  
+  /* Sort and Export Controls */
+  #sortBy {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  .bg-gray-100.hover\:bg-gray-200 {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  /* Quick Actions Panel */
+  .space-y-6 > div {
+    margin-bottom: 1rem !important;
+  }
+  
+  .space-y-6 .space-y-3 {
+    gap: 0.5rem !important;
+  }
+  
+  .space-y-6 .space-y-3 > * + * {
+    margin-top: 0.5rem !important;
+  }
+  
+  /* Quick Action Buttons */
+  .w-full.p-3 {
+    padding: 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* CRUD Wrench Button - Adjust for mobile */
+  .fixed.bottom-6.right-6 {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+  
+  .w-14.h-14 {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+  
+  .w-14.h-14 i {
+    font-size: 1rem !important;
+  }
+  
+  /* CRUD Modal Mobile Adjustments */
+  .max-w-4xl {
+    max-width: calc(100vw - 2rem) !important;
+    margin: 1rem !important;
+  }
+  
+  .max-h-\[90vh\] {
+    max-height: calc(100vh - 2rem) !important;
+  }
+  
+  /* CRUD Modal Content */
+  .p-6 {
+    padding: 1rem !important;
+  }
+  
+  /* CRUD Operation Tabs */
+  .flex.bg-gray-100.rounded-lg.p-1 {
+    padding: 0.25rem !important;
+  }
+  
+  .flex-1.py-3.px-4 {
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* CRUD Form Grids */
+  .grid.grid-cols-1.md\:grid-cols-2.gap-4 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Toast Notifications */
+  .fixed.top-4.right-4 {
+    top: 1rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+  }
+  
+  .max-w-sm {
+    max-width: none !important;
+  }
+}
+
+/* Specific mobile fixes for better UX */
+@media (max-width: 480px) {
+  
+  /* Even smaller screens */
+  .text-3xl.lg\:text-4xl {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Navigation adjustments */
+  .max-w-7xl.mx-auto.px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Hide some elements on very small screens */
+  .hidden.md\:flex {
+    display: none !important;
+  }
+  
+  /* Make buttons more touch-friendly */
+  button {
+    min-height: 44px !important; /* iOS touch target recommendation */
+  }
+  
+  /* Improve input touch targets */
+  input, select, textarea {
+    min-height: 44px !important;
+  }
+  
+  /* Better spacing for small screens */
+  .py-6 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  
+  /* Reduce vertical spacing in landscape */
+  .mb-8 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .py-6 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  
+  /* CRUD Modal adjustments for landscape */
+  .max-h-\[90vh\] {
+    max-height: calc(100vh - 1rem) !important;
+  }
+  
+  .max-h-\[calc\(90vh-120px\)\] {
+    max-height: calc(100vh - 60px) !important;
+  }
+}
+
+/* Fix for iOS Safari viewport issues */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available !important;
+  }
+}
+
+/* Mobile Layout Specific Fixes */
+
+@media (max-width: 768px) {
+  
+  /* 1. Search button inline with text input - only lens icon */
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 {
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
+  }
+  
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 .flex-1 {
+    flex: 1 !important;
+  }
+  
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button {
+    width: auto !important;
+    min-width: 50px !important;
+    padding: 0.875rem 1rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Hide search button text on mobile, show only icon */
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button span {
+    display: none !important;
+  }
+  
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button i {
+    margin-right: 0 !important;
+    font-size: 1rem !important;
+  }
+  
+  /* 2. Quick searches in single row with horizontal scroll */
+  .flex.flex-wrap.gap-2 {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.5rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE/Edge */
+  }
+  
+  /* Hide scrollbar for webkit browsers */
+  .flex.flex-wrap.gap-2::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  .flex.flex-wrap.gap-2 button {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  .flex.flex-wrap.gap-2 span.text-sm {
+    flex-shrink: 0 !important;
+    margin-right: 0.5rem !important;
+  }
+  
+  /* 3. Hide Reset button and arrange two buttons side by side */
+  .flex.flex-wrap.gap-3 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Hide the Reset button specifically */
+  .flex.flex-wrap.gap-3 button:nth-child(3) {
+    display: none !important;
+  }
+  
+  /* Style the two remaining buttons */
+  .flex.flex-wrap.gap-3 button:nth-child(1),
+  .flex.flex-wrap.gap-3 button:nth-child(2) {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Adjust button text for smaller space */
+  .flex.flex-wrap.gap-3 button:nth-child(1) {
+    /* Advanced Search button */
+  }
+  
+  .flex.flex-wrap.gap-3 button:nth-child(2) {
+    /* Find Product Mapping button */
+    font-size: 0.8rem !important;
+  }
+  
+  /* Optional: Shorter button text for very small screens */
+  @media (max-width: 480px) {
+    .flex.flex-wrap.gap-3 button:nth-child(2) span {
+      display: none !important;
+    }
+    
+    .flex.flex-wrap.gap-3 button:nth-child(2)::after {
+      content: "Product Map" !important;
+    }
+  }
+}
+
+/* Additional mobile polish */
+@media (max-width: 480px) {
+  
+  /* Make quick search items even more compact */
+  .flex.flex-wrap.gap-2 {
+    gap: 0.375rem !important;
+  }
+  
+  .flex.flex-wrap.gap-2 button {
+    font-size: 0.6875rem !important;
+    padding: 0.375rem 0.625rem !important;
+  }
+  
+  /* Ensure search input doesn't get too small */
+  #query {
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+  
+  /* Adjust advanced filters spacing */
+  .border-t.border-gray-200.pt-4 {
+    margin-top: 0.75rem !important;
+  }
+}
+
+/* Mobile Search Results Formatting */
+
+@media (max-width: 768px) {
+  
+  /* Search Results Container */
+  #resultsSection .bg-white.rounded-2xl {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Search Results Header */
+  .flex.items-center.justify-between.mb-6 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .flex.items-center.justify-between.mb-6 h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Results Count and Controls */
+  .flex.items-center.gap-2 {
+    width: 100% !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+  
+  #resultsCount {
+    font-size: 0.875rem !important;
+    color: #6b7280 !important;
+    order: 1 !important;
+    width: 100% !important;
+  }
+  
+  /* Sort Dropdown */
+  #sortBy {
+    font-size: 0.875rem !important;
+    padding: 0.5rem !important;
+    order: 2 !important;
+    flex: 1 !important;
+    min-width: 120px !important;
+  }
+  
+  /* Export Button */
+  .bg-gray-100.hover\:bg-gray-200 {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0.75rem !important;
+    order: 3 !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Individual Result Cards */
+  #results > div {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.75rem !important;
+    padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Company Header with Flag */
+  #results .flex.items-start.gap-3 {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Company Flag and Name Row */
+  #results .flex.items-center.gap-2 {
+    width: 100% !important;
+    align-items: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Company Flag */
+  #results .w-8.h-6 {
+    width: 2rem !important;
+    height: 1.5rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Company Name */
+  #results .text-lg.font-bold {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    color: #1f2937 !important;
+    flex: 1 !important;
+  }
+  
+  /* Contact Information Grid */
+  #results .space-y-2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    margin-top: 0.75rem !important;
+  }
+  
+  /* Contact Items */
+  #results .flex.items-center.gap-2.text-sm {
+    background: #f9fafb !important;
+    padding: 0.5rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Contact Icons */
+  #results .flex.items-center.gap-2.text-sm i {
+    width: 1.25rem !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    color: #6b7280 !important;
+  }
+  
+  /* Phone Numbers */
+  #results .text-green-600 {
+    color: #059669 !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Email Addresses */
+  #results .text-blue-600 {
+    color: #2563eb !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Website Links */
+  #results .text-purple-600 {
+    color: #7c3aed !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Location */
+  #results .text-gray-600 {
+    color: #4b5563 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Product Tags */
+  #results .bg-blue-100 {
+    background: #dbeafe !important;
+    color: #1e40af !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 9999px !important;
+    display: inline-block !important;
+    margin: 0.25rem 0.25rem 0.25rem 0 !important;
+  }
+  
+  /* Products Container */
+  #results .flex.flex-wrap.gap-1.mt-2 {
+    margin-top: 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  /* Make clickable areas larger for touch */
+  #results a {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+  }
+  
+  #results a:hover {
+    opacity: 0.8 !important;
+  }
+  
+  /* Loading states */
+  #results .animate-pulse {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%) !important;
+    background-size: 200% 100% !important;
+    animation: loading 1.5s infinite !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  
+  /* Even more compact on very small screens */
+  #results > div {
+    padding: 0.75rem !important;
+  }
+  
+  /* Company name even smaller */
+  #results .text-lg.font-bold {
+    font-size: 0.9375rem !important;
+  }
+  
+  /* Contact items more compact */
+  #results .flex.items-center.gap-2.text-sm {
+    padding: 0.375rem !important;
+    font-size: 0.8125rem !important;
+  }
+  
+  /* Product tags smaller */
+  #results .bg-blue-100 {
+    font-size: 0.6875rem !important;
+    padding: 0.1875rem 0.375rem !important;
+  }
+}
+
+/* Loading animation */
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility improvements */
+@media (max-width: 768px) {
+  
+  /* Better focus states for touch */
+  #results button:focus,
+  #results a:focus {
+    outline: 2px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    #results > div {
+      border: 2px solid #000 !important;
+    }
+    
+    #results .text-gray-600 {
+      color: #000 !important;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    #results .animate-pulse {
+      animation: none !important;
+    }
+  }
+}
