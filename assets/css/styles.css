@@ -389,8 +389,7 @@ html {
   }
 }
 
-
-/* Email Agent Specific Styles - Add these to your styles.css */
+/* Email Agent Specific Styles */
 
 /* Email card styles */
 .email-card {
@@ -626,8 +625,7 @@ html {
   transform: translateX(2px);
 }
 
-
-/* Add this to your styles.css */
+/* Additional utility classes */
 .rotate-90 {
   transform: rotate(90deg);
 }
@@ -639,8 +637,6 @@ html {
 .cursor-not-allowed {
   cursor: not-allowed;
 }
-
-/* Add these to your styles.css file */
 
 /* Toast animations */
 .translate-x-full {
@@ -666,27 +662,56 @@ html {
   transition: all 0.3s ease;
 }
 
-/* Add these if not already present */
-.translate-x-full {
-  transform: translateX(100%);
+/* Quick Searches - Desktop and Mobile */
+.flex.flex-wrap.gap-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.group:hover .group-hover\:rotate-12 {
-  transform: rotate(12deg);
+.flex.flex-wrap.gap-2 button {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  background: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+  border-radius: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.transition-transform {
-  transition: transform 0.3s ease;
+.flex.flex-wrap.gap-2 button:hover {
+  background: #c7d2fe;
+  color: #312e81;
+  transform: translateY(-1px);
+}
+
+/* Advanced Search Buttons - Desktop and Mobile */
+.flex.flex-wrap.gap-3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.flex.flex-wrap.gap-3 button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
 }
 
 /* Mobile Responsive Improvements */
-
-/* Mobile-first approach for main content */
 @media (max-width: 768px) {
   
   /* Header Section */
   .text-center.mb-8 h1 {
-    font-size: 2rem !important; /* Smaller title on mobile */
+    font-size: 2rem !important;
     line-height: 1.2;
     margin-bottom: 1rem;
   }
@@ -704,7 +729,7 @@ html {
   
   /* Search Input */
   #query {
-    font-size: 16px !important; /* Prevents zoom on iOS */
+    font-size: 16px !important;
     padding: 0.875rem !important;
   }
   
@@ -714,16 +739,86 @@ html {
     min-width: auto !important;
   }
   
-  /* Quick Searches */
-  .flex.flex-wrap.gap-2 {
-    flex-direction: column !important;
-    align-items: flex-start !important;
+  /* Search button inline with text input - only lens icon */
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 {
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
   }
   
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 .flex-1 {
+    flex: 1 !important;
+  }
+  
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button {
+    width: auto !important;
+    min-width: 50px !important;
+    padding: 0.875rem 1rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Hide search button text on mobile, show only icon */
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button span {
+    display: none !important;
+  }
+  
+  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button i {
+    margin-right: 0 !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Quick searches in single row with horizontal scroll */
+  .flex.flex-wrap.gap-2 {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    align-items: center !important;
+    padding: 0.5rem 0 !important;
+    margin-bottom: 0.75rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    gap: 0.5rem !important;
+    position: relative !important;
+  }
+  
+  /* Hide scrollbar on mobile */
+  .flex.flex-wrap.gap-2::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Quick searches label */
+  .flex.flex-wrap.gap-2 span.text-sm.text-gray-500 {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    margin-right: 0.5rem !important;
+    font-size: 0.875rem !important;
+    color: #6b7280 !important;
+    align-self: center !important;
+  }
+  
+  /* Quick search buttons mobile */
   .flex.flex-wrap.gap-2 button {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
     font-size: 0.75rem !important;
     padding: 0.5rem 0.75rem !important;
-    white-space: nowrap;
+    min-width: fit-content !important;
+    width: auto !important;
+  }
+  
+  /* Fade indicator */
+  .flex.flex-wrap.gap-2::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 20px !important;
+    background: linear-gradient(to right, transparent, #f9fafb) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
   }
   
   /* Advanced Filters Section */
@@ -746,20 +841,33 @@ html {
   /* Form Inputs and Selects */
   .w-full.px-3.py-2 {
     padding: 0.75rem !important;
-    font-size: 16px !important; /* Prevents zoom on iOS */
+    font-size: 16px !important;
   }
   
-  /* Advanced Search Buttons */
+  /* Advanced Search Buttons - Mobile Override */
   .flex.flex-wrap.gap-3 {
-    flex-direction: column !important;
-    gap: 0.5rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
   }
   
-  .flex.flex-wrap.gap-3 button {
+  /* Hide Reset button on mobile */
+  .flex.flex-wrap.gap-3 button:nth-child(3) {
+    display: none !important;
+  }
+  
+  /* Style remaining buttons */
+  .flex.flex-wrap.gap-3 button:nth-child(1),
+  .flex.flex-wrap.gap-3 button:nth-child(2) {
     width: 100% !important;
     justify-content: center !important;
-    padding: 0.75rem !important;
+    padding: 0.75rem 0.5rem !important;
     font-size: 0.875rem !important;
+  }
+  
+  /* Shorter text for Find Product Mapping button */
+  .flex.flex-wrap.gap-3 button:nth-child(2) {
+    font-size: 0.8rem !important;
   }
   
   /* Main Content Grid - Stack on mobile */
@@ -773,29 +881,249 @@ html {
     grid-column: span 1 !important;
   }
   
+  /* Search Results Container */
+  #resultsSection .bg-white.rounded-2xl {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
   /* Search Results Header */
   .flex.items-center.justify-between.mb-6 {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
     margin-bottom: 1rem !important;
   }
   
+  .flex.items-center.justify-between.mb-6 h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Results Count and Controls */
   .flex.items-center.gap-2 {
     width: 100% !important;
     justify-content: space-between !important;
     flex-wrap: wrap !important;
+    gap: 0.5rem !important;
   }
   
-  /* Sort and Export Controls */
+  #resultsCount {
+    font-size: 0.875rem !important;
+    color: #059669 !important;
+    background: #ecfdf5 !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 0.375rem !important;
+    border: 1px solid #a7f3d0 !important;
+    font-weight: 500 !important;
+    order: 1 !important;
+    width: 100% !important;
+  }
+  
+  /* Sort Dropdown */
   #sortBy {
-    font-size: 0.75rem !important;
+    font-size: 0.875rem !important;
     padding: 0.5rem !important;
+    order: 2 !important;
+    flex: 1 !important;
+    min-width: 120px !important;
+    background: white !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
   }
   
+  #sortBy:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  }
+  
+  /* Export Button */
   .bg-gray-100.hover\:bg-gray-200 {
-    font-size: 0.75rem !important;
+    font-size: 0.875rem !important;
     padding: 0.5rem 0.75rem !important;
+    order: 3 !important;
+    flex-shrink: 0 !important;
+    background: #f3f4f6 !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+  }
+  
+  .bg-gray-100.hover\:bg-gray-200:hover {
+    background: #e5e7eb !important;
+    border-color: #9ca3af !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  /* Individual Result Cards */
+  #results > div {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.875rem !important;
+    padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  
+  /* Add subtle hover effect for cards */
+  #results > div:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  /* Company Header with Flag */
+  #results .flex.items-start.gap-3 {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Company Flag and Name Row */
+  #results .flex.items-center.gap-2 {
+    width: 100% !important;
+    align-items: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Company Flag */
+  #results .w-8.h-6 {
+    width: 2rem !important;
+    height: 1.5rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Company Name */
+  #results .text-lg.font-bold {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    flex: 1 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Contact Information Grid */
+  #results .space-y-2 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    margin-top: 0.75rem !important;
+  }
+  
+  /* Contact Items */
+  #results .flex.items-center.gap-2.text-sm {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.625rem !important;
+    font-size: 0.875rem !important;
+    transition: all 0.15s ease !important;
+  }
+  
+  #results .flex.items-center.gap-2.text-sm:hover {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+  }
+  
+  /* Contact Icons */
+  #results .flex.items-center.gap-2.text-sm i {
+    width: 1.25rem !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    font-size: 0.875rem !important;
+    color: #64748b !important;
+  }
+  
+  /* Phone icon */
+  #results .fa-phone {
+    color: #059669 !important;
+  }
+  
+  /* Email icon */
+  #results .fa-envelope {
+    color: #2563eb !important;
+  }
+  
+  /* Website icon */
+  #results .fa-globe {
+    color: #7c3aed !important;
+  }
+  
+  /* Location icon */
+  #results .fa-map-marker-alt {
+    color: #dc2626 !important;
+  }
+  
+  /* Phone Numbers */
+  #results .text-green-600 {
+    color: #059669 !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Email Addresses */
+  #results .text-blue-600 {
+    color: #2563eb !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Website Links */
+  #results .text-purple-600 {
+    color: #7c3aed !important;
+    font-weight: 500 !important;
+    word-break: break-all !important;
+  }
+  
+  /* Location */
+  #results .text-gray-600 {
+    color: #4b5563 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Product Tags */
+  #results .bg-blue-100 {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe) !important;
+    color: #1e40af !important;
+    border: 1px solid #93c5fd !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 9999px !important;
+    display: inline-block !important;
+    margin: 0.25rem 0.25rem 0.25rem 0 !important;
+    font-weight: 500 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  /* Products Container */
+  #results .flex.flex-wrap.gap-1.mt-2 {
+    margin-top: 0.75rem !important;
+    gap: 0.25rem !important;
+    padding-top: 0.75rem !important;
+    border-top: 1px solid #f3f4f6 !important;
+  }
+  
+  /* Make clickable areas larger for touch */
+  #results a {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+  }
+  
+  #results a:hover {
+    opacity: 0.8 !important;
+  }
+  
+  /* Loading states */
+  #results .animate-pulse {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%) !important;
+    background-size: 200% 100% !important;
+    animation: loading 1.5s infinite !important;
   }
   
   /* Quick Actions Panel */
@@ -868,7 +1196,6 @@ html {
     top: 1rem !important;
     right: 1rem !important;
     left: 1rem !important;
-    right: 1rem !important;
   }
   
   .max-w-sm {
@@ -897,7 +1224,7 @@ html {
   
   /* Make buttons more touch-friendly */
   button {
-    min-height: 44px !important; /* iOS touch target recommendation */
+    min-height: 44px !important;
   }
   
   /* Improve input touch targets */
@@ -909,6 +1236,47 @@ html {
   .py-6 {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
+  }
+  
+  /* Even more compact on very small screens */
+  #results > div {
+    padding: 0.75rem !important;
+  }
+  
+  /* Company name even smaller */
+  #results .text-lg.font-bold {
+    font-size: 0.9375rem !important;
+  }
+  
+  /* Contact items more compact */
+  #results .flex.items-center.gap-2.text-sm {
+    padding: 0.375rem !important;
+    font-size: 0.8125rem !important;
+  }
+  
+  /* Product tags smaller */
+  #results .bg-blue-100 {
+    font-size: 0.6875rem !important;
+    padding: 0.1875rem 0.375rem !important;
+  }
+  
+  /* Quick search adjustments */
+  .flex.flex-wrap.gap-2 {
+    gap: 0.375rem !important;
+  }
+  
+  .flex.flex-wrap.gap-2 button {
+    font-size: 0.6875rem !important;
+    padding: 0.375rem 0.625rem !important;
+  }
+  
+  .flex.flex-wrap.gap-2 span.text-sm.text-gray-500 {
+    font-size: 0.8125rem !important;
+    margin-right: 0.375rem !important;
+  }
+  
+  .flex.flex-wrap.gap-2::after {
+    width: 15px !important;
   }
 }
 
@@ -942,350 +1310,6 @@ html {
   }
 }
 
-/* Mobile Layout Specific Fixes */
-
-@media (max-width: 768px) {
-  
-  /* 1. Search button inline with text input - only lens icon */
-  .flex.flex-col.sm\:flex-row.gap-3.mb-4 {
-    flex-direction: row !important;
-    gap: 0.75rem !important;
-    align-items: stretch !important;
-  }
-  
-  .flex.flex-col.sm\:flex-row.gap-3.mb-4 .flex-1 {
-    flex: 1 !important;
-  }
-  
-  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button {
-    width: auto !important;
-    min-width: 50px !important;
-    padding: 0.875rem 1rem !important;
-    flex-shrink: 0 !important;
-  }
-  
-  /* Hide search button text on mobile, show only icon */
-  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button span {
-    display: none !important;
-  }
-  
-  .flex.flex-col.sm\:flex-row.gap-3.mb-4 button i {
-    margin-right: 0 !important;
-    font-size: 1rem !important;
-  }
-  
-  /* 2. Quick searches in single row with horizontal scroll */
-  .flex.flex-wrap.gap-2 {
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    padding-bottom: 0.5rem !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important; /* Firefox */
-    -ms-overflow-style: none !important; /* IE/Edge */
-  }
-  
-  /* Hide scrollbar for webkit browsers */
-  .flex.flex-wrap.gap-2::-webkit-scrollbar {
-    display: none !important;
-  }
-  
-  .flex.flex-wrap.gap-2 button {
-    flex-shrink: 0 !important;
-    white-space: nowrap !important;
-    font-size: 0.75rem !important;
-    padding: 0.5rem 0.75rem !important;
-  }
-  
-  .flex.flex-wrap.gap-2 span.text-sm {
-    flex-shrink: 0 !important;
-    margin-right: 0.5rem !important;
-  }
-  
-  /* 3. Hide Reset button and arrange two buttons side by side */
-  .flex.flex-wrap.gap-3 {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0.75rem !important;
-  }
-  
-  /* Hide the Reset button specifically */
-  .flex.flex-wrap.gap-3 button:nth-child(3) {
-    display: none !important;
-  }
-  
-  /* Style the two remaining buttons */
-  .flex.flex-wrap.gap-3 button:nth-child(1),
-  .flex.flex-wrap.gap-3 button:nth-child(2) {
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 0.75rem 0.5rem !important;
-    font-size: 0.875rem !important;
-  }
-  
-  /* Adjust button text for smaller space */
-  .flex.flex-wrap.gap-3 button:nth-child(1) {
-    /* Advanced Search button */
-  }
-  
-  .flex.flex-wrap.gap-3 button:nth-child(2) {
-    /* Find Product Mapping button */
-    font-size: 0.8rem !important;
-  }
-  
-  /* Optional: Shorter button text for very small screens */
-  @media (max-width: 480px) {
-    .flex.flex-wrap.gap-3 button:nth-child(2) span {
-      display: none !important;
-    }
-    
-    .flex.flex-wrap.gap-3 button:nth-child(2)::after {
-      content: "Product Map" !important;
-    }
-  }
-}
-
-/* Additional mobile polish */
-@media (max-width: 480px) {
-  
-  /* Make quick search items even more compact */
-  .flex.flex-wrap.gap-2 {
-    gap: 0.375rem !important;
-  }
-  
-  .flex.flex-wrap.gap-2 button {
-    font-size: 0.6875rem !important;
-    padding: 0.375rem 0.625rem !important;
-  }
-  
-  /* Ensure search input doesn't get too small */
-  #query {
-    min-width: 0 !important;
-    flex: 1 !important;
-  }
-  
-  /* Adjust advanced filters spacing */
-  .border-t.border-gray-200.pt-4 {
-    margin-top: 0.75rem !important;
-  }
-}
-
-/* Mobile Search Results Formatting */
-
-@media (max-width: 768px) {
-  
-  /* Search Results Container */
-  #resultsSection .bg-white.rounded-2xl {
-    padding: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  /* Search Results Header */
-  .flex.items-center.justify-between.mb-6 {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.75rem !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  .flex.items-center.justify-between.mb-6 h3 {
-    font-size: 1.25rem !important;
-    margin-bottom: 0 !important;
-  }
-  
-  /* Results Count and Controls */
-  .flex.items-center.gap-2 {
-    width: 100% !important;
-    justify-content: space-between !important;
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
-  }
-  
-  #resultsCount {
-    font-size: 0.875rem !important;
-    color: #6b7280 !important;
-    order: 1 !important;
-    width: 100% !important;
-  }
-  
-  /* Sort Dropdown */
-  #sortBy {
-    font-size: 0.875rem !important;
-    padding: 0.5rem !important;
-    order: 2 !important;
-    flex: 1 !important;
-    min-width: 120px !important;
-  }
-  
-  /* Export Button */
-  .bg-gray-100.hover\:bg-gray-200 {
-    font-size: 0.875rem !important;
-    padding: 0.5rem 0.75rem !important;
-    order: 3 !important;
-    flex-shrink: 0 !important;
-  }
-  
-  /* Individual Result Cards */
-  #results > div {
-    border: 1px solid #e5e7eb !important;
-    border-radius: 0.75rem !important;
-    padding: 1rem !important;
-    margin-bottom: 0.75rem !important;
-    background: white !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  /* Company Header with Flag */
-  #results .flex.items-start.gap-3 {
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-  }
-  
-  /* Company Flag and Name Row */
-  #results .flex.items-center.gap-2 {
-    width: 100% !important;
-    align-items: center !important;
-    margin-bottom: 0.5rem !important;
-  }
-  
-  /* Company Flag */
-  #results .w-8.h-6 {
-    width: 2rem !important;
-    height: 1.5rem !important;
-    flex-shrink: 0 !important;
-  }
-  
-  /* Company Name */
-  #results .text-lg.font-bold {
-    font-size: 1rem !important;
-    line-height: 1.2 !important;
-    color: #1f2937 !important;
-    flex: 1 !important;
-  }
-  
-  /* Contact Information Grid */
-  #results .space-y-2 {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 0.5rem !important;
-    margin-top: 0.75rem !important;
-  }
-  
-  /* Contact Items */
-  #results .flex.items-center.gap-2.text-sm {
-    background: #f9fafb !important;
-    padding: 0.5rem !important;
-    border-radius: 0.5rem !important;
-    font-size: 0.875rem !important;
-  }
-  
-  /* Contact Icons */
-  #results .flex.items-center.gap-2.text-sm i {
-    width: 1.25rem !important;
-    text-align: center !important;
-    flex-shrink: 0 !important;
-    color: #6b7280 !important;
-  }
-  
-  /* Phone Numbers */
-  #results .text-green-600 {
-    color: #059669 !important;
-    font-weight: 500 !important;
-    word-break: break-all !important;
-  }
-  
-  /* Email Addresses */
-  #results .text-blue-600 {
-    color: #2563eb !important;
-    font-weight: 500 !important;
-    word-break: break-all !important;
-  }
-  
-  /* Website Links */
-  #results .text-purple-600 {
-    color: #7c3aed !important;
-    font-weight: 500 !important;
-    word-break: break-all !important;
-  }
-  
-  /* Location */
-  #results .text-gray-600 {
-    color: #4b5563 !important;
-    font-weight: 500 !important;
-  }
-  
-  /* Product Tags */
-  #results .bg-blue-100 {
-    background: #dbeafe !important;
-    color: #1e40af !important;
-    font-size: 0.75rem !important;
-    padding: 0.25rem 0.5rem !important;
-    border-radius: 9999px !important;
-    display: inline-block !important;
-    margin: 0.25rem 0.25rem 0.25rem 0 !important;
-  }
-  
-  /* Products Container */
-  #results .flex.flex-wrap.gap-1.mt-2 {
-    margin-top: 0.5rem !important;
-    gap: 0.25rem !important;
-  }
-  
-  /* Make clickable areas larger for touch */
-  #results a {
-    min-height: 44px !important;
-    display: flex !important;
-    align-items: center !important;
-    text-decoration: none !important;
-  }
-  
-  #results a:hover {
-    opacity: 0.8 !important;
-  }
-  
-  /* Loading states */
-  #results .animate-pulse {
-    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%) !important;
-    background-size: 200% 100% !important;
-    animation: loading 1.5s infinite !important;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-  
-  /* Even more compact on very small screens */
-  #results > div {
-    padding: 0.75rem !important;
-  }
-  
-  /* Company name even smaller */
-  #results .text-lg.font-bold {
-    font-size: 0.9375rem !important;
-  }
-  
-  /* Contact items more compact */
-  #results .flex.items-center.gap-2.text-sm {
-    padding: 0.375rem !important;
-    font-size: 0.8125rem !important;
-  }
-  
-  /* Product tags smaller */
-  #results .bg-blue-100 {
-    font-size: 0.6875rem !important;
-    padding: 0.1875rem 0.375rem !important;
-  }
-}
-
-/* Loading animation */
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
 /* Accessibility improvements */
 @media (max-width: 768px) {
   
@@ -1312,5 +1336,33 @@ html {
     #results .animate-pulse {
       animation: none !important;
     }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  
+  .flex.flex-wrap.gap-2::after {
+    background: linear-gradient(to right, transparent, #1f2937) !important;
+  }
+  
+  #results > div {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+  }
+  
+  #results .text-lg.font-bold {
+    color: #f9fafb !important;
+  }
+  
+  #results .flex.items-center.gap-2.text-sm {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
   }
 }
