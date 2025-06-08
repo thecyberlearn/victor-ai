@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade Intelligence - AI Trade Management</title>
+  <!-- External Dependencies -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Link to your existing CSS file -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+  <!-- Navigation Header -->
+  <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center gap-3">
+          <button onclick="goHome()" class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center hover:bg-indigo-200 transition-colors">
+            <i class="fas fa-home text-indigo-600"></i>
+          </button>
+          <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="fas fa-ship text-white text-lg"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-gray-800">Trade Intelligence</h1>
+            <p class="text-sm text-gray-500">Victor AI Agent</p>
+          </div>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-6">
+          <div class="text-right">
+            <p class="text-sm text-gray-500">Last updated</p>
+            <p class="font-semibold text-gray-800" id="lastUpdated">Just now</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span class="text-sm text-green-600 font-medium">Online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 bg-gray-50 min-h-screen">
+    
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">AI Trade Intelligence</h1>
+    </div>
+
+    <!-- Enhanced Search Command Center -->
+    <div class="bg-white rounded-2xl p-6 mb-8 shadow-lg border border-gray-200">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <i class="fas fa-brain text-white"></i>
+        </div>
+        <h2 class="text-xl font-bold text-gray-800">Trade AI Command</h2>
+      </div>
+      
+      <!-- Main Search Bar -->
+      <div class="flex flex-col sm:flex-row gap-3 mb-4">
+        <div class="flex-1">
+          <input 
+            id="query" 
+            type="text" 
+            placeholder="Ask AI: 'find seller from india', 'find buyer from uk', 'find coca cola sellers'" 
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-800 placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none transition-all" 
+          />
+        </div>
+        <button 
+          onclick="callWorkflow()" 
+          class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 min-w-[120px]"
+          id="searchBtn"
+        >
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+        </button>
+      </div>
+      
+      <!-- Quick Searches -->
+      <div class="mb-4">
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm text-gray-500 mr-2">Quick searches:</span>
+          <button onclick="setQuickSearch('find seller from india')" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-full transition-colors">
+            Sellers from India
+          </button>
+          <button onclick="setQuickSearch('find buyer from uk')" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-full transition-colors">
+            UK Buyers
+          </button>
+          <button onclick="setQuickSearch('find pepsi sellers')" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-full transition-colors">
+            Pepsi Sellers
+          </button>
+          <button onclick="setQuickSearch('find cosmetic buyers')" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1 rounded-full transition-colors">
+            Cosmetic Buyers
+          </button>
+        </div>
+      </div>
+
+      <!-- Advanced Search Panel -->
+      <div class="border-t border-gray-200 pt-4">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fas fa-sliders-h text-gray-600"></i>
+          <h3 class="text-sm font-semibold text-gray-700">Advanced Filters</h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <!-- Search Type -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Search Type</label>
+            <select id="searchType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option value="all">All Companies</option>
+              <option value="buyer">Buyers Only</option>
+              <option value="seller">Sellers Only</option>
+              <option value="product-match">Product Mapping</option>
+            </select>
+          </div>
+          
+          <!-- Product/Brand -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Product/Brand</label>
+            <input 
+              id="productSearch" 
+              type="text" 
+              placeholder="e.g., Pepsi, Coca Cola, FMCG"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          
+          <!-- Country -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+            <select id="countryFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option value="">All Countries</option>
+              <option value="India">India</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="UAE">UAE</option>
+              <option value="China">China</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="Italy">Italy</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Advanced Search Actions -->
+        <div class="flex flex-wrap gap-3">
+          <button 
+            onclick="performAdvancedSearch()" 
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2"
+          >
+            <i class="fas fa-search"></i>
+            Advanced Search
+          </button>
+          <button 
+            onclick="performProductMatching()" 
+            class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-all flex items-center gap-2"
+          >
+            <i class="fas fa-link"></i>
+            Find Product Mapping
+          </button>
+          <button 
+            onclick="resetAdvancedFilters()" 
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2"
+          >
+            <i class="fas fa-undo"></i>
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Matching Results Section -->
+    <div id="productMatchingResults" class="hidden bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+          <i class="fas fa-link text-purple-600"></i>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-800">Product Mapping Results</h3>
+          <p class="text-gray-600" id="productMatchingSubtitle">Find buyers and sellers for your products</p>
+        </div>
+        <button onclick="closeProductMatching()" class="text-gray-400 hover:text-gray-600 p-2">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <!-- Product Info Header -->
+      <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 mb-6" id="productInfoHeader">
+        <!-- Product details will be populated here -->
+      </div>
+      
+      <!-- Buyers and Sellers Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Buyers Section -->
+        <div class="bg-blue-50 rounded-lg p-4">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-shopping-cart text-blue-600"></i>
+            <h4 class="text-lg font-semibold text-blue-800" id="buyersTitle">Buyers (0)</h4>
+          </div>
+          <div class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar" id="buyersList">
+            <!-- Buyers will be populated here -->
+          </div>
+        </div>
+        
+        <!-- Sellers Section -->
+        <div class="bg-green-50 rounded-lg p-4">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-store text-green-600"></i>
+            <h4 class="text-lg font-semibold text-green-800" id="sellersTitle">Sellers (0)</h4>
+          </div>
+          <div class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar" id="sellersList">
+            <!-- Sellers will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Results Section -->
+      <div class="lg:col-span-2">
+        <!-- Results will show here -->
+        <div id="resultsSection" class="hidden">
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold text-gray-800">Search Results</h3>
+              <div class="flex items-center gap-2">
+                <p id="resultsCount" class="text-sm text-gray-600"></p>
+                <select id="sortBy" onchange="sortResults()" class="text-sm border border-gray-300 rounded px-2 py-1">
+                  <option value="default">Default</option>
+                  <option value="name">Sort by Name</option>
+                  <option value="country">Sort by Country</option>
+                  <option value="products">Sort by Products</option>
+                </select>
+                <button onclick="exportResults()" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg transition-colors flex items-center gap-2">
+                  <i class="fas fa-download text-xs"></i>
+                  Export
+                </button>
+              </div>
+            </div>
+            
+            <div id="results" class="grid grid-cols-1 gap-4 custom-scrollbar max-h-dvh overflow-y-auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Actions Panel -->
+      <div class="space-y-6">
+        
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Quick Actions</h3>
+          <div class="space-y-3">
+            <button onclick="quickSearch('all buyers')" class="w-full p-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium transition-colors flex items-center gap-3">
+              <i class="fas fa-search"></i>
+              <span>All Buyers</span>
+            </button>
+            <button onclick="quickSearch('all sellers')" class="w-full p-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-medium transition-colors flex items-center gap-3">
+              <i class="fas fa-ship"></i>
+              <span>All Sellers</span>
+            </button>
+            <button onclick="quickSearch('gulfood data')" class="w-full p-3 bg-orange-600 hover:bg-orange-700 rounded-lg text-white font-medium transition-colors flex items-center gap-3">
+              <i class="fas fa-globe"></i>
+              <span>Gulfood Data</span>
+            </button>
+            <button onclick="clearResults()" class="w-full p-3 bg-gray-600 hover:bg-gray-700 rounded-lg text-white font-medium transition-colors flex items-center gap-3">
+              <i class="fas fa-broom"></i>
+              <span>Clear Results</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRUD Elements - Fixed positioning outside main content -->
+  
+  <!-- Minimal CRUD Wrench Icon -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button 
+      onclick="toggleCrudModal()" 
+      class="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+      id="crudWrenchBtn"
+      title="Data Management Tools"
+    >
+      <i class="fas fa-wrench text-xl group-hover:rotate-12 transition-transform"></i>
+    </button>
+  </div>
+
+  <!-- Enhanced CRUD Modal -->
+  <div id="crudModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-wrench text-indigo-600"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">Data Management</h3>
+              <p class="text-gray-600">Create, update, or delete company records</p>
+            </div>
+          </div>
+          <button onclick="closeCrudModal()" class="text-gray-400 hover:text-gray-600 p-2">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-6 max-h-[calc(90vh-120px)] overflow-y-auto">
+        <!-- Operation Selector -->
+        <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
+          <button 
+            onclick="selectCrudOperation('create')" 
+            class="flex-1 py-3 px-4 rounded-md font-medium transition-all flex items-center justify-center gap-2"
+            id="createTab"
+          >
+            <i class="fas fa-plus"></i>
+            Create
+          </button>
+          <button 
+            onclick="selectCrudOperation('update')" 
+            class="flex-1 py-3 px-4 rounded-md font-medium transition-all flex items-center justify-center gap-2"
+            id="updateTab"
+          >
+            <i class="fas fa-edit"></i>
+            Update
+          </button>
+          <button 
+            onclick="selectCrudOperation('delete')" 
+            class="flex-1 py-3 px-4 rounded-md font-medium transition-all flex items-center justify-center gap-2"
+            id="deleteTab"
+          >
+            <i class="fas fa-trash"></i>
+            Delete
+          </button>
+        </div>
+        
+        <!-- Create Form -->
+        <div id="createOperation" class="hidden">
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Type *</label>
+                <select id="createType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                  <option value="">Select Type</option>
+                  <option value="importer">Importer</option>
+                  <option value="exporter">Exporter</option>
+                  <option value="gulfood">Gulfood</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                <input id="createName" type="text" placeholder="Company name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                <select id="createCountry" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                  <option value="">Loading countries...</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input id="createEmail" type="email" placeholder="company@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                <input id="createPhone" type="text" placeholder="+1234567890" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Website</label>
+                <input id="createWebsite" type="url" placeholder="https://company.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Products/Services</label>
+                <textarea id="createProducts" placeholder="List of products or services" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 h-24 resize-none"></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                <textarea id="createAddress" placeholder="Company address" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 h-24 resize-none"></textarea>
+              </div>
+            </div>
+            
+            <button onclick="executeCrud('create')" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors" id="createBtn">
+              <i class="fas fa-plus mr-2"></i>Create Company
+            </button>
+          </div>
+        </div>
+        
+        <!-- Update Form -->
+        <div id="updateOperation" class="hidden">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+              <input id="updateName" type="text" placeholder="Enter company name to update" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Field to Update *</label>
+                <select id="updateField" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                  <option value="">Select Field</option>
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                  <option value="country">Country</option>
+                  <option value="website">Website</option>
+                  <option value="products">Products/Services</option>
+                  <option value="address">Address</option>
+                  <option value="type">Type</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">New Value *</label>
+                <input id="updateValue" type="text" placeholder="Enter new value" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+              </div>
+            </div>
+            
+            <button onclick="executeCrud('update')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors" id="updateBtn">
+              <i class="fas fa-edit mr-2"></i>Update Company
+            </button>
+          </div>
+        </div>
+        
+        <!-- Delete Form -->
+        <div id="deleteOperation" class="hidden">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+              <input id="deleteName" type="text" placeholder="Enter company name to delete" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-exclamation-triangle text-red-600 mt-1"></i>
+                <div>
+                  <p class="text-red-800 font-medium">Warning</p>
+                  <p class="text-red-700 text-sm">This action cannot be undone. The company will be permanently deleted.</p>
+                </div>
+              </div>
+            </div>
+            
+            <label class="flex items-center gap-2">
+              <input type="checkbox" id="deleteConfirm" class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+              <span class="text-sm text-gray-700">I understand this action is permanent</span>
+            </label>
+            
+            <button onclick="executeCrud('delete')" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors opacity-50 cursor-not-allowed" id="deleteBtn" disabled>
+              <i class="fas fa-trash mr-2"></i>Delete Company
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2">
+    <!-- Toast notifications will be added here -->
+  </div>
+
+  <!-- AI Response Modal -->
+  <div id="aiModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-robot text-blue-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800">Trade AI Response</h3>
+          </div>
+          <button onclick="closeAIModal()" class="text-gray-400 hover:text-gray-600">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="p-6 overflow-y-auto custom-scrollbar" id="aiResponse">
+        <!-- AI response content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+   <script src="assets/js/utils.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="/assets/js/trade-intelligence.js"></script>
+</body>
+</html>
